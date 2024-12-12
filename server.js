@@ -1,11 +1,7 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+import app from './src/app.js';  // Importation du fichier app.js
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const port = process.env.PORT || 3000;  // Récupération du port depuis les variables d'environnement ou utiliser le port 5000
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
