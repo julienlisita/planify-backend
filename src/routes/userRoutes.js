@@ -6,7 +6,6 @@ import { findAllUsers } from '../controllers/userController.js';
 
 router
     .route('/')
-
     .get(findAllUsers)
 
 export default router;
