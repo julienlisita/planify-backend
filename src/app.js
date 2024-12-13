@@ -3,9 +3,11 @@ import errorHandler from './middlewares/errorhandler.js';
 import userRoutes from './routes/userRoutes.js';
 import helmet from 'helmet';
 import morgan from 'morgan';
-
+import {sequelize, connectToDatabase}  from './config/database.js'; 
 
 const app = express();
+
+connectToDatabase();
 
 // Middlewares globaux
 app.use(helmet());
