@@ -79,4 +79,8 @@ const User = sequelize.define('User', {
   },
 });
 
+User.associate = (models) => {
+  User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
+};
+
 export default User;
