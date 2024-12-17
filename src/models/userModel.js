@@ -14,7 +14,7 @@ const User = sequelize.define('User', {
     validate: {
       len: {
         args: [3, 30],
-        msg: 'Le username doit contenir entre 3 et 30 caractères.',
+        msg: 'Le pseudo doit contenir entre 3 et 30 caractères.',
       },
     },
   },
@@ -24,7 +24,7 @@ const User = sequelize.define('User', {
     validate: {
       len: {
         args: [2, 50],
-        msg: 'Le firstname doit contenir entre 2 et 50 caractères.',
+        msg: 'Le prénom doit contenir entre 2 et 50 caractères.',
       },
     },
   },
@@ -34,7 +34,7 @@ const User = sequelize.define('User', {
     validate: {
       len: {
         args: [2, 50],
-        msg: 'Le lastname doit contenir entre 2 et 50 caractères.',
+        msg: 'Le nom doit contenir entre 2 et 50 caractères.',
       },
     },
   },
@@ -81,6 +81,34 @@ const User = sequelize.define('User', {
 
 User.associate = (models) => {
   User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
+  User.hasMany(models.Notifications, { foreignKey: 'notification_id', as: 'users' });
 };
+
+    // Définition des associations
+    User.associate = (models) => {
+
+      // Un utilisateur appartient à un rôle
+      User.belongsTo(models.Role, { 
+          foreignKey: 'roleId', 
+          onDelete: 'SET NULL',
+      });
+      // Un utilisateur a plusieurs notifications
+      User.hasMany(models.Notification, { 
+          foreignKey: 'userId', 
+          onDelete: 'CASCADE',
+      });
+
+      // Un utilisateur envoie plusieurs messages
+      User.hasMany(models.Message, { 
+        foreignKey: 'senderId', 
+        as: 'sentMessages', 
+        onDelete: 'CASCADE' });
+
+      // Un utilisateur reçoit plusieurs messages
+      User.hasMany(models.Message, { 
+        foreignKey: 'receiverId', 
+        as: 'receivedMessages', 
+        onDelete: 'CASCADE' });
+  };
 
 export default User;

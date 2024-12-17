@@ -49,4 +49,13 @@ const Notification = sequelize.define('Notification', {
   timestamps: false, // Désactive les champs Sequelize automatiques
 });
 
+  // Fonction pour définir les associations
+  Notification.associate = (models) => {
+    
+    // une notification appartient à un utilisateur
+    Notification.belongsTo(models.User, { 
+      foreignKey: 'userId'
+    });
+  };
+
 export default Notification;

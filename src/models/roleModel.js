@@ -16,13 +16,17 @@ const Role = sequelize.define('Role', {
     },
   },
 }, {
+  tableName: 'Roles',
   timestamps: false, // Pas besoin de timestamps pour une table de référence
   underscored: true,
 });
 
   // Fonction pour définir les associations
   Role.associate = (models) => {
-    Role.hasMany(models.User, { foreignKey: 'role_id', as: 'users' });
+
+    // Un role est partagé par plusieurs utilisateurs
+    Role.hasMany(models.User, { 
+      foreignKey: 'roleId' });
   };
 
 export default Role;

@@ -34,4 +34,18 @@ const Message = sequelize.define('Message', {
   timestamps: false, // Désactive les champs Sequelize automatiques
 });
 
+// Définition des associations
+Message.associate = (models) => {
+  
+  // un message est envoyé par un utilisateur
+  Message.belongsTo(models.User, { 
+    foreignKey: 'senderId', 
+    as: 'sender'});
+
+  // un message est reçu par un utilisateur
+  Message.belongsTo(models.User, { 
+    foreignKey: 'receiverId', 
+    as: 'receiver'});
+};
+
 export default Message;
