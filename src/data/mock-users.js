@@ -1,4 +1,4 @@
-[
+const mockUsers= [
     {
       "username": "admin",
       "firstname": "Alice",
@@ -45,3 +45,5 @@
       "role_id": 3
     }
   ]
+
+  export default mockUsers;

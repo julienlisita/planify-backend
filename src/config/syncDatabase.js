@@ -1,17 +1,7 @@
 import { sequelize } from './database.js'; // Importation de sequelize
 import User from '../models/userModel.js';    // Modèle utilisateur
 import Role from '../models/roleModel.js';    // Modèle rôle
-import { fileURLToPath } from 'url';
-import path from 'path';
-import fs from 'fs';
-
-// Obtenez le répertoire du fichier courant
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Utilisation de __dirname pour localiser le fichier JSON
-const usersPath = path.join(__dirname, '../data/users.json');
-const users = JSON.parse(fs.readFileSync(usersPath, 'utf-8'));
+import mockUsers from '../data/mock-users.js';
 
 const syncDatabase = async () => {
     try {
@@ -30,7 +20,7 @@ const syncDatabase = async () => {
         console.log('Rôles ajoutés avec succès.');
 
         // Pré-remplissage des utilisateurs
-        await User.bulkCreate(users);
+        await User.bulkCreate(mockUsers);
         console.log('Utilisateurs ajoutés avec succès.');
     } catch (error) {
         console.error('Erreur lors de la synchronisation de la base de données:', error);
