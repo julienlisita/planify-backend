@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
 
-const Recipes = sequelize.define('User', {
+const Recipe = sequelize.define('Recipe', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -98,6 +98,7 @@ const Recipes = sequelize.define('User', {
         defaultValue: DataTypes.NOW,
     },
 }, {
+    tableName: 'Recipes',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
@@ -106,4 +107,4 @@ User.associate = (models) => {
     User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
 };
 
-export default Recipes;
+export default Recipe;
