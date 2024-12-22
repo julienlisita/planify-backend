@@ -26,7 +26,9 @@ const Role = sequelize.define('Role', {
 
     // Un role est partagé par plusieurs utilisateurs
     Role.hasMany(models.User, { 
-      foreignKey: 'roleId' });
+      foreignKey: 'roleId', 
+      onDelete: 'SET NULL', 
+      onUpdate: 'CASCADE',});
   };
 
 export default Role;
