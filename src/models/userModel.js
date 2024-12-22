@@ -56,15 +56,25 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  created_at: {
+  createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-  updated_at: {
+  updatedAt: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW,
+  },
+
+  roleId: { 
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Roles', 
+      key: 'id',      
+    },
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',  
   },
 }, {
   tableName: 'Users',
@@ -78,12 +88,6 @@ const User = sequelize.define('User', {
     },
   },
 });
-
-User.associate = (models) => {
-  User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
-  User.hasMany(models.Notifications, { foreignKey: 'notification_id', as: 'users' });
-};
-
     // Définition des associations
     User.associate = (models) => {
 
@@ -91,6 +95,7 @@ User.associate = (models) => {
       User.belongsTo(models.Role, { 
           foreignKey: 'roleId', 
           onDelete: 'SET NULL',
+          onUpdate: 'CASCADE',
       });
       // Un utilisateur a plusieurs notifications
       User.hasMany(models.Notification, { 
