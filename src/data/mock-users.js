@@ -1,48 +1,57 @@
 const mockUsers= [
     {
-      "username": "admin",
+      "username": "superAdmin",
       "firstname": "Alice",
       "lastname": "Martin",
       "password": "hashed_password_1", 
-      "email": "admin@example.com",
+      "email": "superadmin@example.com",
       "avatar": null,
-      "roleId": 2
+      "roleId": 1
     },
     {
-      "username": "johndoe",
+      "username": "Admin",
       "firstname": "John",
       "lastname": "Doe",
       "password": "hashed_password_2",
-      "email": "johndoe@example.com",
+      "email": "admin@example.com",
       "avatar": "https://example.com/avatar1.png",
-      "roleId": 1
-    },
-    {
-      "username": "janedoe",
-      "firstname": "Jane",
-      "lastname": "Doe",
-      "password": "hashed_password_3",
-      "email": "janedoe@example.com",
-      "avatar": null,
-      "roleId": 1
+      "roleId": 2
     },
     {
       "username": "author1",
+      "firstname": "Julien",
+      "lastname": "Lisita",
+      "password": "hashed_password_3",
+      "email": "julienlisita@example.com",
+      "avatar": "https://example.com/avatar1.png",
+      "roleId": 3
+    },
+    {
+      "username": "author2",
+      "firstname": "Jane",
+      "lastname": "Doe",
+      "password": "hashed_password_4",
+      "email": "janedoe@example.com",
+      "avatar": null,
+      "roleId": 3
+    },
+    {
+      "username": "member1",
       "firstname": "Mark",
       "lastname": "Twain",
-      "password": "hashed_password_4",
+      "password": "hashed_password_5",
       "email": "marktwain@example.com",
       "avatar": "https://example.com/avatar2.png",
       "roleId": 4
     },
     {
-      "username": "superadmin",
+      "username": "Member2",
       "firstname": "Emily",
       "lastname": "Clark",
-      "password": "hashed_password_5",
-      "email": "superadmin@example.com",
+      "password": "hashed_password_6",
+      "email": "Member2@example.com",
       "avatar": "https://example.com/avatar3.png",
-      "roleId": 3
+      "roleId": 4
     }
   ]
 
