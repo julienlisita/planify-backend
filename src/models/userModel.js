@@ -82,7 +82,7 @@ const User = sequelize.define('User', {
   hooks: {
     beforeValidate(user) {
       // Enforce lastname and firstname if role is author
-      if (user.role_id === 4 && (!user.firstname || !user.lastname)) { // assuming "author" has role_id = 4
+      if (user.role_id === 4 && (!user.firstname || !user.lastname)) { // assuming "author" has roleId = 4
         throw new Error('Firstname et lastname sont requis pour le rôle author.');
       }
     },
@@ -114,6 +114,11 @@ const User = sequelize.define('User', {
         foreignKey: 'receiverId', 
         as: 'receivedMessages', 
         onDelete: 'CASCADE' });
+
+      // Un utilisateur possedent plusieurs recettes
+      // User.hasMany(models.Recipe, { 
+      //   foreignKey: 'userId',});
+
   };
 
 export default User;
