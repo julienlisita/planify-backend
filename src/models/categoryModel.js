@@ -34,4 +34,20 @@ const Category = sequelize.define('Category', {
     underscored: true,
 });
 
+// Définition des associations
+Category.associate = (models) => {
+  
+    // Une categorie appartient à plusieurs recette
+    Category.belongsToMany(models.Recipe, { 
+        through: RecipeCategory });
+
+    // Une categorie possède plusieurs sous_catégories
+    Category.hasMany(models.SubCategory, { 
+        foreignKey: 'categoryId', 
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE', });
+  
+};
+       
+
 export default Category;
