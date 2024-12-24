@@ -4,10 +4,12 @@ import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
 import Like from '../models/likeModel.js';
 import Category from '../models/categoryModel.js';
+import SubCategory from '../models/subCategory.js';
 import mockUsers from '../data/mock-users.js';
 import mockRecipes from '../data/mock-recipes.js';
 import mockLikes from '../data/mock-likes.js';
 import mockCategories from '../data/mock-categories';
+import mockSubCategories from '../data/mock-subCategories';
 import bcrypt from 'bcrypt'; // Importation de bcrypt
 
 const syncDatabase = async () => {
@@ -42,7 +44,7 @@ const syncDatabase = async () => {
 
         // Pré-remplissage des recettes
         await Recipe.bulkCreate(mockRecipes);
-        console.log('Recette ajoutés avec succès.');
+        console.log('Recette ajoutées avec succès.');
 
         // Pré-remplissage des likes
         await Like.bulkCreate(mockLikes);
@@ -50,8 +52,11 @@ const syncDatabase = async () => {
 
         // Pré-remplissage des catégorie
         await Category.bulkCreate(mockCategories);
-        console.log('Likes ajoutés avec succès.');
+        console.log('Catégories ajoutées avec succès.');
 
+        // Pré-remplissage des catégorie
+        await SubCategory.bulkCreate(mockSubCategories);
+        console.log('Sous catégories ajoutées avec succès.');
 
 
     } catch (error) {
