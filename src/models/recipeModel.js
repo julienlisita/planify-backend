@@ -97,14 +97,14 @@ const Recipe = sequelize.define('Recipe', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    // userId: { 
-    //     type: DataTypes.INTEGER,
-    //     allowNull: true,
-    //     references: {
-    //       model: 'Users', 
-    //       key: 'id',      
-    //     },
-    //  },
+    userId: { 
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Users', 
+          key: 'id',      
+        },
+     },
 }, {
     tableName: 'Recipes',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
@@ -112,50 +112,50 @@ const Recipe = sequelize.define('Recipe', {
 });
 
     // Définition des associations
-    // Recipe.associate = (models) => {
+    Recipe.associate = (models) => {
 
-    //     // Une recette appartient à un utilisateur
-    //     Recipe.belongsTo(models.User, { 
-    //         foreignKey: 'userId', 
-    //         onDelete: 'SET NULL',
-    //         onUpdate: 'CASCADE',
-    //     });
-    //     // Many-to-Many avec table pivot RecipeCategory
-    //     Recipe.belongsToMany(models.Category, { 
-    //         through: RecipeCategory });
+        // Une recette appartient à un utilisateur
+        Recipe.belongsTo(models.User, { 
+            foreignKey: 'userId', 
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+        });
+        // Many-to-Many avec table pivot RecipeCategory
+        Recipe.belongsToMany(models.Category, { 
+            through: RecipeCategory });
 
-    //     // Une recette possède plusieurs likes
-    //     Recipe.hasMany(models.Like, { 
-    //       foreignKey: 'recipeId', 
-    //       onDelete: 'CASCADE' });
+        // Une recette possède plusieurs likes
+        Recipe.hasMany(models.Like, { 
+          foreignKey: 'recipeId', 
+          onDelete: 'CASCADE' });
 
-    //     // Une recette possède plusieurs commentaires
-    //     Recipe.hasMany(models.Comment, { 
-    //     foreignKey: 'recipeId', 
-    //     onDelete: 'CASCADE' });
+        // Une recette possède plusieurs commentaires
+        Recipe.hasMany(models.Comment, { 
+        foreignKey: 'recipeId', 
+        onDelete: 'CASCADE' });
 
-    //     // Une recette reçoie plusieurs favoris
-    //     Recipe.hasMany(models.Favorite, { 
-    //         foreignKey: 'recipeId', 
-    //         onDelete: 'CASCADE' });
+        // Une recette reçoie plusieurs favoris
+        Recipe.hasMany(models.Favorite, { 
+            foreignKey: 'recipeId', 
+            onDelete: 'CASCADE' });
 
-    //     // Une recette possède plusieurs evaluations
-    //     Recipe.hasMany(models.Evaluation, { 
-    //         foreignKey: 'recipeId', 
-    //         onDelete: 'CASCADE' });
+        // Une recette possède plusieurs evaluations
+        Recipe.hasMany(models.Evaluation, { 
+            foreignKey: 'recipeId', 
+            onDelete: 'CASCADE' });
 
-    //     // Une recette appartient à plusieurs plan de repas
-    //     Recipe.belongsToMany(models.MealPlan, { 
-    //         through: MealPlanRecipe });
+        // Une recette appartient à plusieurs plan de repas
+        Recipe.belongsToMany(models.MealPlan, { 
+            through: MealPlanRecipe });
 
-    //     // Many-to-Many avec table pivot RecipeIngredient personnalisée
-    //     Recipe.belongsToMany(models.Ingredient, {
-    //          through: RecipeIngredient });
+        // Many-to-Many avec table pivot RecipeIngredient personnalisée
+        Recipe.belongsToMany(models.Ingredient, {
+             through: RecipeIngredient });
 
-    //     // Many-to-Many avec table pivot ShoppingListRecipe
-    //     Recipe.belongsToMany(models.ShoppingList, { 
-    //         through: ShoppingListRecipe });
+        // Many-to-Many avec table pivot ShoppingListRecipe
+        Recipe.belongsToMany(models.ShoppingList, { 
+            through: ShoppingListRecipe });
 
-    // };
+    };
 
 export default Recipe;

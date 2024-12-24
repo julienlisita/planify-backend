@@ -34,7 +34,7 @@ const models = {
   Favorite: FavoriteModel(sequelize),
   MealPLan: MealPLanModel(sequelize),
   Comment: CommentModel(sequelize),
-  like: LikeModel(sequelize),
+  Like: LikeModel(sequelize),
   News: NewsModel(sequelize),
   Category: CategoryModel(sequelize),
   SubCategory: SubCategoryModel(sequelize),

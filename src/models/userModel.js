@@ -97,8 +97,15 @@ const User = sequelize.define('User', {
           onDelete: 'SET NULL',
           onUpdate: 'CASCADE',
       });
+
       // Un utilisateur a plusieurs notifications
       User.hasMany(models.Notification, { 
+          foreignKey: 'userId', 
+          onDelete: 'CASCADE',
+      });
+      
+      // Un utilisateur a plusieurs likes
+      User.hasMany(models.Like, { 
           foreignKey: 'userId', 
           onDelete: 'CASCADE',
       });
@@ -116,8 +123,8 @@ const User = sequelize.define('User', {
         onDelete: 'CASCADE' });
 
       // Un utilisateur possedent plusieurs recettes
-      // User.hasMany(models.Recipe, { 
-      //   foreignKey: 'userId',});
+      User.hasMany(models.Recipe, { 
+        foreignKey: 'userId',});
 
   };
 
