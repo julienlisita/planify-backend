@@ -16,8 +16,8 @@ import CommentModel from './commentModel.js';
 import LikeModel from './likeModel.js';
 import NewsModel from './newsModel.js';
 import CategoryModel from './categoryModel.js';
-import SubCategoryModel from './subCategory.js';
-import SubSubCategoryModel from './subSubCategory.js';
+import SubCategoryModel from './subCategoryModel.js';
+import SubSubCategoryModel from './subSubCategoryModel.js';
 
 // Initialiser les modèles
 const models = {

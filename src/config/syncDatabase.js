@@ -4,12 +4,14 @@ import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
 import Like from '../models/likeModel.js';
 import Category from '../models/categoryModel.js';
-import SubCategory from '../models/subCategory.js';
+import SubCategory from '../models/subCategoryModel.js';
+import SubSubCategory from '../models/subSubCategoryModel.js';
 import mockUsers from '../data/mock-users.js';
 import mockRecipes from '../data/mock-recipes.js';
 import mockLikes from '../data/mock-likes.js';
-import mockCategories from '../data/mock-categories';
-import mockSubCategories from '../data/mock-subCategories';
+import mockCategories from '../data/mock-categories.js';
+import mockSubCategories from '../data/mock-subCategories.js';
+import mockSubSubCategories from '../data/mock-subSubCategories.js';
 import bcrypt from 'bcrypt'; // Importation de bcrypt
 
 const syncDatabase = async () => {
@@ -54,9 +56,13 @@ const syncDatabase = async () => {
         await Category.bulkCreate(mockCategories);
         console.log('Catégories ajoutées avec succès.');
 
-        // Pré-remplissage des catégorie
+        // Pré-remplissage des sous-catégorie
         await SubCategory.bulkCreate(mockSubCategories);
         console.log('Sous catégories ajoutées avec succès.');
+
+        // Pré-remplissage des sous-sous-catégorie
+        await SubSubCategory.bulkCreate(mockSubSubCategories);
+        console.log('Sous-sous catégories ajoutées avec succès.');
 
 
     } catch (error) {

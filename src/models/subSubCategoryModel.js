@@ -28,10 +28,30 @@ const SubSubCategory = sequelize.define('SubSubCategory', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
+    subCategoryId: { 
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'SubCategories', 
+          key: 'id',      
+        },
+    },
 }, {
-    tableName: 'Sub_sub_Category',
+    tableName: 'SubSubCategories',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
+
+// Définition des associations
+SubSubCategory.associate = (models) => {
+  
+    // Une sous-categorie appartient à une catégorie
+    SubSubCategory.belongsTo(models.SubCategory, { 
+        foreignKey: 'subCategoryId', 
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE', 
+        });
+  
+};
 
 export default SubSubCategory;
