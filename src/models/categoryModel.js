@@ -29,7 +29,7 @@ const Category = sequelize.define('Category', {
         defaultValue: DataTypes.NOW,
     },
 }, {
-    tableName: 'Category',
+    tableName: 'Categories',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
