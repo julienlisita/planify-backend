@@ -1,0 +1,9 @@
+const mockCategories = [
+
+{name: "Type de plat"},
+{name: "Régime spécifique"},
+{name: "Pays et régions"},
+{name: "Ingredient principal"}
+]
+
+export default mockCategories;

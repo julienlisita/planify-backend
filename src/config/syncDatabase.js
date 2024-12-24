@@ -2,8 +2,12 @@ import { sequelize } from './database.js'; // Importation de sequelize
 import User from '../models/userModel.js';    // Modèle utilisateur
 import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
+import Like from '../models/likeModel.js';
+import Category from '../models/categoryModel.js';
 import mockUsers from '../data/mock-users.js';
 import mockRecipes from '../data/mock-recipes.js';
+import mockLikes from '../data/mock-likes.js';
+import mockCategories from '../data/mock-categories';
 import bcrypt from 'bcrypt'; // Importation de bcrypt
 
 const syncDatabase = async () => {
@@ -36,10 +40,18 @@ const syncDatabase = async () => {
         await User.bulkCreate(hashedUsers);
         console.log('Utilisateurs ajoutés avec succès.');
 
-        await Recipe.bulkCreate(mockRecipes);
-        console.log('Utilisateurs ajoutés avec succès.');
-
         // Pré-remplissage des recettes
+        await Recipe.bulkCreate(mockRecipes);
+        console.log('Recette ajoutés avec succès.');
+
+        // Pré-remplissage des likes
+        await Like.bulkCreate(mockLikes);
+        console.log('Likes ajoutés avec succès.');
+
+        // Pré-remplissage des catégorie
+        await Category.bulkCreate(mockCategories);
+        console.log('Likes ajoutés avec succès.');
+
 
 
     } catch (error) {
