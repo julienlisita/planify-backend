@@ -50,5 +50,13 @@ const News = sequelize.define('News', {
     underscored: true,
 });
 
+// Fonction pour définir les associations
+News.associate = (models) => {
+
+    // une notification appartient à un utilisateur
+    News.belongsTo(models.User, {
+        foreignKey: 'userId'
+    });
+};
 
 export default News;

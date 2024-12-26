@@ -32,10 +32,44 @@ const Evaluation = sequelize.define('Evaluation', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Users',
+            key: 'id',
+        },
+    },
+    recipeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Recipes',
+            key: 'id',
+        },
+    },
 }, {
     tableName: 'Evaluations',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
+
+// Fonction pour définir les associations
+evaluation.associate = (models) => {
+
+    // Une évaluation appartient à un utilisateur
+    evaluation.belongsTo(models.User, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    });
+
+    // une évaluation appartient à une recette
+    evaluation.belongsTo(models.Recipe, {
+        foreignKey: 'recipeId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    });
+};
 
 export default Evaluation;

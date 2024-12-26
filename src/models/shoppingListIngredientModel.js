@@ -30,10 +30,44 @@ const ShoppingListIngredient = sequelize.define('ShoppingListIngredient', {
         defaultValue: false,
         comment: 'Statut de lecture du message (false = non cochée, true = cochée)',
     },
+    ingredientId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Ingredients',
+            key: 'id',
+        },
+    },
+    shoppingListId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'ShoppingList_Ingredients',
+            key: 'id',
+        },
+    },
 }, {
     tableName: 'ShoppingList_Ingredients',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
+
+// Fonction pour définir les associations
+shoppingListIngredient.associate = (models) => {
+
+    // Un ingrédient de la liste de courses appartient à Ingrédients
+    shoppingListIngredient.belongsTo(models.Ingredient, {
+        foreignKey: 'ingredientId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    });
+
+    // Un ingrédient de la liste de courses appartient à Shopping_Lists 
+    shoppingListIngredient.belongsTo(models.ShoppingList, {
+        foreignKey: 'shoppingListId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    });
+};
 
 export default ShoppingListIngredient;

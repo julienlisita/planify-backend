@@ -1,26 +1,16 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
 
-const Comment = sequelize.define('Comment', {
+const Favorite = sequelize.define('Favorite', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-            notEmpty: {
-                msg: 'Le contenu du message ne peut pas être vide.',
-            },
-        },
-    },
-    created_at: {
+    added_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
-        comment: 'Date de création du message',
     },
     userId: {
         type: DataTypes.INTEGER,
@@ -38,28 +28,29 @@ const Comment = sequelize.define('Comment', {
             key: 'id',
         },
     },
+
 }, {
-    tableName: 'Comments',
+    tableName: 'Favorites',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
 
 // Fonction pour définir les associations
-comment.associate = (models) => {
+favorite.associate = (models) => {
 
-    // Un commentaire appartient à un utilisateur
-    comment.belongsTo(models.User, {
+    // Un favori appartient à un utilisateur
+    favorite.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     });
 
-    // Un commentaire appartient à une recette
-    comment.belongsTo(models.Recipe, {
+    // Un favori appartient à une recette
+    favorite.belongsTo(models.Recipe, {
         foreignKey: 'recipeId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     });
 };
 
-export default Comment;
+export default Favorite;

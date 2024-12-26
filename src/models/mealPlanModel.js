@@ -26,10 +26,42 @@ const MealPLanModel = sequelize.define('MealPLanModel', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Users',
+            key: 'id',
+        },
+    },
+    recipeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Recipes',
+          key: 'id',
+        },
+      },    
 }, {
     tableName: 'Meal_plans',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
+
+// Fonction pour définir les associations
+mealPlan.associate = (models) => {
+
+    // Un plan de repas appartient à un utilisateur
+    mealPlan.belongsTo(models.User, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+    });
+
+    // Un plan de repas appartient à une recette
+    mealPlan.belongsTo(models.Recipe, {
+        through: MealPlanRecipe
+    });
+}
 
 export default MealPLanModel;
