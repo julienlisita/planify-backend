@@ -3,12 +3,14 @@ import User from '../models/userModel.js';    // Modèle utilisateur
 import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
 import Like from '../models/likeModel.js';
+import Comment from '../models/commentModel.js'
 import Category from '../models/categoryModel.js';
 import SubCategory from '../models/subCategoryModel.js';
 import SubSubCategory from '../models/subSubCategoryModel.js';
 import mockUsers from '../data/mock-users.js';
 import mockRecipes from '../data/mock-recipes.js';
 import mockLikes from '../data/mock-likes.js';
+import mockComments from '../data/mock-comments.js';
 import mockCategories from '../data/mock-categories.js';
 import mockSubCategories from '../data/mock-subCategories.js';
 import mockSubSubCategories from '../data/mock-subSubCategories.js';
@@ -51,6 +53,10 @@ const syncDatabase = async () => {
         // Pré-remplissage des likes
         await Like.bulkCreate(mockLikes);
         console.log('Likes ajoutés avec succès.');
+
+        // Pré-remplissage des commentaires
+        await Comment.bulkCreate(mockComments);
+        console.log('Commentaires ajoutés avec succès.');
 
         // Pré-remplissage des catégorie
         await Category.bulkCreate(mockCategories);
