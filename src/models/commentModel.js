@@ -45,17 +45,17 @@ const Comment = sequelize.define('Comment', {
 });
 
 // Fonction pour définir les associations
-comment.associate = (models) => {
+Comment.associate = (models) => {
 
     // Un commentaire appartient à un utilisateur
-    comment.belongsTo(models.User, {
+    Comment.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     });
 
     // Un commentaire appartient à une recette
-    comment.belongsTo(models.Recipe, {
+    Comment.belongsTo(models.Recipe, {
         foreignKey: 'recipeId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
