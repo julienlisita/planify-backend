@@ -55,17 +55,17 @@ const Evaluation = sequelize.define('Evaluation', {
 });
 
 // Fonction pour définir les associations
-evaluation.associate = (models) => {
+Evaluation.associate = (models) => {
 
     // Une évaluation appartient à un utilisateur
-    evaluation.belongsTo(models.User, {
+    Evaluation.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     });
 
     // une évaluation appartient à une recette
-    evaluation.belongsTo(models.Recipe, {
+    Evaluation.belongsTo(models.Recipe, {
         foreignKey: 'recipeId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
