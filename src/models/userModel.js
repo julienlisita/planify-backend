@@ -116,6 +116,12 @@ const User = sequelize.define('User', {
         onDelete: 'CASCADE',
       });
 
+      // Un utilisateur a plusieurs favoris
+      User.hasMany(models.Favorite, { 
+        foreignKey: 'userId', 
+        onDelete: 'CASCADE',
+      });
+
       // Un utilisateur a plusieurs évaluations
       User.hasMany(models.Evaluation, { 
         foreignKey: 'userId', 

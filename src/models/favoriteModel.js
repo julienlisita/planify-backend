@@ -36,17 +36,17 @@ const Favorite = sequelize.define('Favorite', {
 });
 
 // Fonction pour définir les associations
-favorite.associate = (models) => {
+Favorite.associate = (models) => {
 
     // Un favori appartient à un utilisateur
-    favorite.belongsTo(models.User, {
+    Favorite.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
     });
 
     // Un favori appartient à une recette
-    favorite.belongsTo(models.Recipe, {
+    Favorite.belongsTo(models.Recipe, {
         foreignKey: 'recipeId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
