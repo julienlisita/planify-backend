@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
+import ShoppingListIngredient from './shoppingListIngredientModel.js';
 
 const Recipe = sequelize.define('Recipe', {
     id: {
@@ -144,17 +145,9 @@ const Recipe = sequelize.define('Recipe', {
             foreignKey: 'recipeId', 
             onDelete: 'CASCADE' });
 
-        // Une recette appartient à plusieurs plan de repas
-        Recipe.belongsToMany(models.MealPlan, { 
-            through: MealPlanRecipe });
-
         // Many-to-Many avec table pivot RecipeIngredient personnalisée
         Recipe.belongsToMany(models.Ingredient, {
-             through: RecipeIngredient });
-
-        // Many-to-Many avec table pivot ShoppingListRecipe
-        Recipe.belongsToMany(models.ShoppingList, { 
-            through: ShoppingListRecipe });
+             through: models.RecipeIngredient });
 
     };
 
