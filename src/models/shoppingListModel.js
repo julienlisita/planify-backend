@@ -7,6 +7,17 @@ const ShoppingList = sequelize.define('ShoppingList', {
         primaryKey: true,
         autoIncrement: true,
     },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            len: {
+                args: [3, 30],
+                msg: 'Le nom doit contenir entre 3 et 30 caractères.'
+            },
+        },
+    },
     created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -33,17 +44,18 @@ const ShoppingList = sequelize.define('ShoppingList', {
 });
 
 // Fonction pour définir les associations
-shoppingList.associate = (models) => {
+ShoppingList.associate = (models) => {
 
-    // Many-to-Many avec table pivot ShoppingListRecipes
-    ShoppingList.belongsToMany(models.Recipe, {
-        through: ShoppingListRecipe
+    // Une liste de course appartient à un utilisateur
+    ShoppingList.belongsTo(models.User, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     });
 
-    // Une Liste de courses contient plusieurs Ingrédients
-    ShoppingList.hasMany(models.ShoppingListIngredient, {
-        foreignKey: 'shoppingListId',
-        onDelete: 'CASCADE'
+    // Many-to-Many avec table pivot ShoppingListIngredient personnalisée
+    ShoppingList.belongsToMany(models.Ingredient, {
+        through: models.ShoppingListIngredient,
     });
 };
 
