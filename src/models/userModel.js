@@ -110,6 +110,18 @@ const User = sequelize.define('User', {
           onDelete: 'CASCADE',
       });
 
+      // Un utilisateur a plusieurs commentaires
+      User.hasMany(models.Comment, { 
+        foreignKey: 'userId', 
+        onDelete: 'CASCADE',
+      });
+
+      // Un utilisateur a plusieurs évaluations
+      User.hasMany(models.Evaluation, { 
+        foreignKey: 'userId', 
+        onDelete: 'CASCADE',
+      });
+
       // Un utilisateur envoie plusieurs messages
       User.hasMany(models.Message, { 
         foreignKey: 'senderId', 

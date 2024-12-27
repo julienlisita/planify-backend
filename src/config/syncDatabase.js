@@ -4,6 +4,7 @@ import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
 import Like from '../models/likeModel.js';
 import Comment from '../models/commentModel.js'
+import MealPlan from '../models/mealPlanModel.js';
 import Evaluation from '../models/evaluationModel.js';
 import Category from '../models/categoryModel.js';
 import SubCategory from '../models/subCategoryModel.js';
@@ -12,6 +13,7 @@ import mockUsers from '../data/mock-users.js';
 import mockRecipes from '../data/mock-recipes.js';
 import mockLikes from '../data/mock-likes.js';
 import mockComments from '../data/mock-comments.js';
+import mockMealPlans from '../data/mock-mealPlans.js';
 import mockEvaluations from '../data/mock-evaluations.js';
 import mockCategories from '../data/mock-categories.js';
 import mockSubCategories from '../data/mock-subCategories.js';
@@ -63,6 +65,10 @@ const syncDatabase = async () => {
         // Pré-remplissage des commentaires
         await Evaluation.bulkCreate(mockEvaluations);
         console.log('Evaluations ajoutés avec succès.');
+
+        // Pré-remplissage des commentaires
+        await MealPlan.bulkCreate(mockMealPlans);
+        console.log('Meal plans ajoutés avec succès.');
 
         // Pré-remplissage des catégorie
         await Category.bulkCreate(mockCategories);
