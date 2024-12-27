@@ -34,4 +34,16 @@ const Ingredient = sequelize.define('Ingredient', {
   underscored: true,
 });
 
+ // Définition des associations
+ Ingredient.associate = (models) => {
+
+  // Many-to-Many avec table pivot Recipe
+    Ingredient.belongsToMany(models.Recipe, { 
+    through: models.RecipeIngredient });
+
+  // Many-to-Many avec table pivot ShoppingList
+    Ingredient.belongsToMany(models.ShoppingList, { 
+    through: models.ShoppingListIngredient });
+};
+
 export default Ingredient;
