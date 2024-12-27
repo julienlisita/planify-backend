@@ -4,6 +4,7 @@ import Role from '../models/roleModel.js';    // Modèle rôle
 import Recipe from '../models/recipeModel.js';
 import Ingredient from '../models/ingredientModel.js';
 import RecipeIngredient from '../models/recipeIngredientModel.js';
+import ShoppingList from '../models/shoppingListModel.js';
 import Like from '../models/likeModel.js';
 import Comment from '../models/commentModel.js'
 import Favorite from '../models/favoriteModel.js';
@@ -16,6 +17,7 @@ import mockUsers from '../data/mock-users.js';
 import mockFavorites from '../data/mock-favorites.js';
 import mockRecipes from '../data/mock-recipes.js';
 import mockIngredients from '../data/mock-ingredient.js';
+import mockShoppingLists from '../data/mock-shoppingLists.js';
 import mockRecipeIngredients from '../data/mock-recipeIngredient.js';
 import mockLikes from '../data/mock-likes.js';
 import mockComments from '../data/mock-comments.js';
@@ -67,6 +69,10 @@ const syncDatabase = async () => {
         // Pré-remplissage de la table recipeIngredient
         await RecipeIngredient.bulkCreate(mockRecipeIngredients);
         console.log('table  RecipeIngredient remplie avec succès.');
+
+        // Pré-remplissage de la table ShoppingList
+        await ShoppingList.bulkCreate(mockShoppingLists);
+        console.log('table  ShoppingList remplie avec succès.');
 
         // Pré-remplissage des likes
         await Like.bulkCreate(mockLikes);
