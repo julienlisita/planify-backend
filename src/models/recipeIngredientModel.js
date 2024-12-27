@@ -24,6 +24,22 @@ const RecipeIngredient = sequelize.define('RecipeIngredient', {
             },
         },
     },
+    ingredientId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Ingredients',
+            key: 'id',
+        },
+    },
+    recipeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Recipes',
+            key: 'id',
+        },
+    },
 }, {
     tableName: 'Recipe_Ingredients',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
