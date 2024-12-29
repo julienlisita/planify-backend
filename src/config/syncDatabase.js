@@ -9,9 +9,11 @@ import ShoppingListIngredient from '../models/shoppingListIngredientModel.js';
 import Like from '../models/likeModel.js';
 import Comment from '../models/commentModel.js'
 import Favorite from '../models/favoriteModel.js';
+import Notification from '../models/notificationModel.js';
 import MealPlan from '../models/mealPlanModel.js';
 import Evaluation from '../models/evaluationModel.js';
 import Category from '../models/categoryModel.js';
+import Message from '../models/messageModel.js';
 import SubCategory from '../models/subCategoryModel.js';
 import SubSubCategory from '../models/subSubCategoryModel.js';
 import mockUsers from '../data/mock-users.js';
@@ -25,10 +27,12 @@ import mockLikes from '../data/mock-likes.js';
 import mockComments from '../data/mock-comments.js';
 import mockMealPlans from '../data/mock-mealPlans.js';
 import mockEvaluations from '../data/mock-evaluations.js';
+import mockMessages from '../data/mock-messages.js';
 import mockCategories from '../data/mock-categories.js';
 import mockSubCategories from '../data/mock-subCategories.js';
 import mockSubSubCategories from '../data/mock-subSubCategories.js';
 import bcrypt from 'bcrypt'; // Importation de bcrypt
+import mockNotifications from '../data/mock-notifications.js';
 
 const syncDatabase = async () => {
     try {
@@ -84,6 +88,12 @@ const syncDatabase = async () => {
         await Like.bulkCreate(mockLikes);
         console.log('Likes ajoutés avec succès.');
 
+        // Pré-remplissage des likes
+        await Message.bulkCreate(mockMessages );
+        console.log('Likes ajoutés avec succès.');
+        // Pré-remplissage des likes
+        await Notification.bulkCreate(mockNotifications );
+        console.log('Likes ajoutés avec succès.');
         // Pré-remplissage des commentaires
         await Comment.bulkCreate(mockComments);
         console.log('Commentaires ajoutés avec succès.');
