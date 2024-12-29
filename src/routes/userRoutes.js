@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllUsers, getUserById, createUser, updateUser, deleteUser, signupUser } from '../controllers/userController.js';
+import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -13,9 +13,5 @@ router.route('/:id')
     .get(getUserById)        // Récupérer un utilisateur par ID
     .put(updateUser)         // Mettre à jour un utilisateur par ID
     .delete(deleteUser);     // Supprimer un utilisateur par ID
-
-// Route pour récupérer tous les utilisateurs (GET)
-router.route('/signup')
-    .post(signupUser);      // Créer un utilisateur avec les informations nécessaires pour l'inscription
 
 export default router;

@@ -63,7 +63,7 @@ export const deleteUser = async (req, res) => {
 };
 
 // Fonction générique pour gérer la création d'un utilisateur
-const handleCreateUser = async (userData, res) => {
+export const handleCreateUser = async (userData, res) => {
     const { username, email, password } = userData;
   
     try {
@@ -87,17 +87,6 @@ const handleCreateUser = async (userData, res) => {
         error: error.message,
       });
     }
-  };
-  
-  // Créer un user par inscription 
-  export const signupUser = async (req, res) => {
-    const { username, email, password, firstname, lastname } = req.body;
-  
-    // Appeler la fonction générique avec role_id par défaut (user)
-    await handleCreateUser(
-      { username, email, password, firstname, lastname, roleId: 2 },
-      res
-    );
   };
   
   // Créer un user par un admin
