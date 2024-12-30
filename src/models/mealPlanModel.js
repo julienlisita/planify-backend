@@ -40,6 +40,8 @@ const MealPlan = sequelize.define('MealPLanModel', {
             model: 'Users',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
     recipeId: {
         type: DataTypes.INTEGER,
@@ -48,6 +50,8 @@ const MealPlan = sequelize.define('MealPLanModel', {
           model: 'Recipes',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },    
 }, {
     tableName: 'Meal_plans',

@@ -35,7 +35,9 @@ const ShoppingList = sequelize.define('ShoppingList', {
         references: {
             model: 'Users',
             key: 'id',
-        }
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
 }, {
     tableName: 'Shopping_Lists',

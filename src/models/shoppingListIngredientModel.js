@@ -37,6 +37,8 @@ const ShoppingListIngredient = sequelize.define('ShoppingListIngredient', {
             model: 'Ingredients',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
     shoppingListId: {
         type: DataTypes.INTEGER,
@@ -45,6 +47,8 @@ const ShoppingListIngredient = sequelize.define('ShoppingListIngredient', {
             model: 'Shopping_Lists',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
 }, {
     tableName: 'ShoppingList_Ingredients',

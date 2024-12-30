@@ -105,6 +105,8 @@ const Recipe = sequelize.define('Recipe', {
           model: 'Users', 
           key: 'id',      
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
      },
 }, {
     tableName: 'Recipes',

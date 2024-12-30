@@ -31,6 +31,8 @@ const RecipeIngredient = sequelize.define('RecipeIngredient', {
             model: 'Ingredients',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
     recipeId: {
         type: DataTypes.INTEGER,
@@ -39,6 +41,8 @@ const RecipeIngredient = sequelize.define('RecipeIngredient', {
             model: 'Recipes',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
 }, {
     tableName: 'Recipe_Ingredients',

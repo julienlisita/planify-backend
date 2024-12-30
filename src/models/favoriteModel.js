@@ -19,6 +19,8 @@ const Favorite = sequelize.define('Favorite', {
             model: 'Users',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
     recipeId: {
         type: DataTypes.INTEGER,
@@ -27,6 +29,8 @@ const Favorite = sequelize.define('Favorite', {
             model: 'Recipes',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
 
 }, {

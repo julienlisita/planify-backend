@@ -114,6 +114,7 @@ const User = sequelize.define('User', {
       User.hasMany(models.Comment, { 
         foreignKey: 'userId', 
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       });
 
       // Un utilisateur a plusieurs favoris

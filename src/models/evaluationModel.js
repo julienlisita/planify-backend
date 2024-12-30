@@ -39,6 +39,8 @@ const Evaluation = sequelize.define('Evaluation', {
             model: 'Users',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
     recipeId: {
         type: DataTypes.INTEGER,
@@ -47,6 +49,8 @@ const Evaluation = sequelize.define('Evaluation', {
             model: 'Recipes',
             key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
     },
 }, {
     tableName: 'Evaluations',

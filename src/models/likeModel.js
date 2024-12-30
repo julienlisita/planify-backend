@@ -19,6 +19,8 @@ const Like = sequelize.define('Like', {
           model: 'Users', 
           key: 'id',      
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
      },
      recipeId: { 
         type: DataTypes.INTEGER,
@@ -27,6 +29,8 @@ const Like = sequelize.define('Like', {
           model: 'Recipes', 
           key: 'id',      
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
      },
 }, {
     tableName: 'Likes',

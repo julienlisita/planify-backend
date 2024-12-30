@@ -38,6 +38,16 @@ const Notification = sequelize.define('Notification', {
     allowNull: false,
     defaultValue: false,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+        model: 'Users',
+        key: 'id',
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+},
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
