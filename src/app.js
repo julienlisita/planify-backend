@@ -1,7 +1,9 @@
 import express, { json } from 'express';
 import errorHandler from './middlewares/errorhandler.js';
 import userRoutes from './routes/userRoutes.js';
+import adminRoutes from './routes/adminRoutes.js'
 import authRoutes from './routes/authRoutes.js';
+import cookieParser from 'cookie-parser'
 import helmet from 'helmet';
 import morgan from 'morgan';
 import {sequelize, connectToDatabase}  from './config/database.js'; 
@@ -14,6 +16,7 @@ connectToDatabase();
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(json());
+app.use(cookieParser());
 
 
 app.get('/', (req, res) => {
@@ -21,8 +24,9 @@ app.get('/', (req, res) => {
 })
 
 // Routes
-app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/profiles', userRoutes);
+app.use('/api/admin/users', adminRoutes);
 
 // Gestion des erreurs
 app.use(errorHandler);

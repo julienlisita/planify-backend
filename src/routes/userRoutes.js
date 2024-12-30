@@ -1,17 +1,23 @@
 import express from 'express';
-import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/userController.js';
+import { getAllProfiles, getUserProfile, getOwnProfile, updateOwnProfile, deleteOwnProfile } from '../controllers/userController.js';
+import { authenticateAndAuthorize } from '../middlewares/authentification.js'
 
 const router = express.Router();
 
-// Route pour récupérer tous les utilisateurs (GET)
-router.route('/')
-    .get(getAllUsers)        // Récupérer tous les utilisateurs
-    .post(createUser);       // Créer un nouvel utilisateur
+// Routes utilisateur : voir, modifier, supprimer son propre profil
+router.route('/me')
 
-// Route pour récupérer un utilisateur par ID, mettre à jour et supprimer (GET, PUT, DELETE)
+    .get(authenticateAndAuthorize, getOwnProfile) // Voir son propre profil
+    .put(authenticateAndAuthorize, updateOwnProfile) // Modifier son propre profil
+    .delete(authenticateAndAuthorize, deleteOwnProfile); // Supprimer son propre profil  
+
+// Route pour consulter le profil public d'un utilisateur (pas besoin d'être authentifié)
+router.route('/')
+    .get(getAllProfiles);
+
+// Route pour consulter le profil public d'un utilisateur (pas besoin d'être authentifié)
 router.route('/:id')
-    .get(getUserById)        // Récupérer un utilisateur par ID
-    .put(updateUser)         // Mettre à jour un utilisateur par ID
-    .delete(deleteUser);     // Supprimer un utilisateur par ID
+    .get(getUserProfile);
+
 
 export default router;
