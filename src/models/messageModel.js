@@ -22,6 +22,28 @@ const Message = sequelize.define('Message', {
     defaultValue: false,
     comment: 'Statut de lecture du message (false = non lu, true = lu)',
   },
+  senderId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Users', // Nom de la table associée
+      key: 'id', // Clé primaire de la table associée
+    },
+    onDelete: 'CASCADE', // Supprimer les messages si l'expéditeur est supprimé
+    onUpdate: 'CASCADE',
+    comment: "Clé étrangère de l'utilisateur expéditeur",
+  },
+  receiverId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Users', // Nom de la table associée
+      key: 'id', // Clé primaire de la table associée
+    },
+    onDelete: 'CASCADE', // Supprimer les messages si le destinataire est supprimé
+    onUpdate: 'CASCADE',
+    comment: "Clé étrangère de l'utilisateur destinataire",
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
