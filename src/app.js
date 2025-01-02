@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-import errorHandler from './middlewares/errorhandler.js';
+import errorHandler from './middlewares/errorHandler.js';
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js'
 import authRoutes from './routes/authRoutes.js';

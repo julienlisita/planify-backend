@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import config from '../config/default.js';
-import errorHandler from '../middlewares/errorhandler.js';
 
 
 const getAllProfiles = async (req, res) => {
@@ -14,8 +13,7 @@ const getAllProfiles = async (req, res) => {
 
     res.status(200).json({ users });
   } catch (error) {
-    console.error('Erreur lors de la récupération des profils publics :', error);
-    res.status(500).json({ error: 'Erreur lors de la récupération des profils publics' });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };
  
@@ -38,8 +36,7 @@ const getUserProfile = async (req, res) => {
     return res.status(200).json(user);
 
   } catch (error) {
-    console.error('Erreur lors de la récupération du profil utilisateur:', error);
-    res.status(500).json({ error: 'Erreur serveur lors de la récupération du profil' });
+    next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };
 
@@ -56,8 +53,7 @@ const getOwnProfile = async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
-    res.status(500).json({ error: "Erreur serveur" });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };
 
@@ -94,8 +90,7 @@ const updateOwnProfile = async (req, res) => {
       const { password: _, ...updatedUser } = user.toJSON(); // Exclure le mot de passe de la réponse
       return res.status(200).json({ message: 'Profil mis à jour avec succès.', user: updatedUser });
   } catch (error) {
-      console.error('Erreur lors de la mise à jour du profil :', error);
-      return res.status(500).json({ message: 'Erreur serveur lors de la mise à jour du profil.', error });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };
 
@@ -116,11 +111,10 @@ const deleteOwnProfile = async (req, res) => {
       .status(200)
       .json({ message: 'Utilisateur supprimé avec succès.', user: { id: user.id, email: user.email } });
   } catch (error) {
-    console.error('Erreur lors de la suppression du profil:', error);
-    res.status(500).json({ error: 'Une erreur est survenue lors de la suppression du profil.', details: error.message });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
+
   }
 };
-
 
 export {getAllProfiles, getUserProfile, getOwnProfile, updateOwnProfile, deleteOwnProfile}
 

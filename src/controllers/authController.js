@@ -7,12 +7,15 @@ import { handleCreateUser} from '../controllers/adminControllers.js'
 // Contrôleur pour créer un nouveau compte
   export const signupUser = async (req, res) => {
     const { username, email, password, firstname, lastname } = req.body;
-  
-    // Appeler la fonction générique avec role_id par défaut (user)
-    await handleCreateUser(
-      { username, email, password, firstname, lastname, roleId: 2 },
-      res
+    try{
+      // Appeler la fonction générique avec role_id par défaut (user)
+      await handleCreateUser(
+        { username, email, password, firstname, lastname, roleId: 2 },
+        res
     );
+    }catch (error) {
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
+    }
   };
 
 
@@ -40,19 +43,19 @@ export const login = async (req, res) => {
     );
     res.status(200).json({ message: 'Connexion réussie', token });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur serveur', details: error.message });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };
 
 export const logout = async (req, res) => {
   try {
-  
-    res.clearCookie('token', { httpOnly: true, secure: config.app.env === 'production' });
+    // supprimer le token du storage dans le front:
+    // - localStorage pour React Web
+    // - AsyncStorage pour React Native
 
     // Réponse de succès pour la déconnexion
     res.status(200).json({ message: 'Déconnexion réussie' });
   } catch (error) {
-    console.error('Erreur lors de la déconnexion:', error);
-    res.status(500).json({ error: 'Erreur serveur lors de la déconnexion' });
+      next(error); // Passer l'erreur au middleware de gestion des erreurs
   }
 };

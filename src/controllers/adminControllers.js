@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.findAll();
         return res.status(200).json(users);
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs', error });
+        ext(error); // Passer l'erreur au middleware de gestion des erreurs
     }
 };
 
@@ -34,7 +34,7 @@ const getUserById = async (req, res) => {
         }
         return res.status(200).json(user);
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur lors de la récupération de l\'utilisateur', error });
+        next(error); // Passer l'erreur au middleware de gestion des erreurs
     }
 };
 
@@ -55,7 +55,7 @@ const updateUserById = async (req, res) => {
         await user.save();
         return res.status(200).json(user);
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur lors de la mise à jour de l\'utilisateur', error });
+        next(error); // Passer l'erreur au middleware de gestion des erreurs
     }
 };
 
@@ -70,7 +70,7 @@ const deleteUserById = async (req, res) => {
         await user.destroy();
         return res.status(200).json({ message: 'Utilisateur supprimé avec succès' });
     } catch (error) {
-        return res.status(500).json({ message: 'Erreur lors de la suppression de l\'utilisateur', error });
+        next(error); // Passer l'erreur au middleware de gestion des erreurs
     }
 };
 
