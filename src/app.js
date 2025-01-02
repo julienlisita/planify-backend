@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import errorHandler from './middlewares/errorHandler.js';
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js'
+import superAdminRoutes from './routes/superAdminRoutes.js'
 import authRoutes from './routes/authRoutes.js';
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet';
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', userRoutes);
 app.use('/api/admin/users', adminRoutes);
+app.use('/api/superAdmin/admins', superAdminRoutes);
 
 // Gestion des erreurs
 app.use(errorHandler);
