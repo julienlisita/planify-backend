@@ -5,16 +5,13 @@ import config from '../config/default.js';
 import { handleCreateUser} from '../controllers/adminControllers.js'
 
 // Contrôleur pour créer un nouveau compte
-  export const signupUser = async (req, res) => {
+  export const signupUser = async (req, res, next) => {
     const { username, email, password, firstname, lastname } = req.body;
-    try{
-      // Appeler la fonction générique avec role_id par défaut (user)
-      await handleCreateUser(
-        { username, email, password, firstname, lastname, roleId: 2 },
-        res
-    );
-    }catch (error) {
-      next(error); // Passer l'erreur au middleware de gestion des erreurs
+    try {
+      const user = await handleCreateUser({ username, email, password, firstname, lastname, roleId: 2 });
+      res.status(201).json({ message: 'Utilisateur créé avec succès.', user });
+    } catch (error) {
+      next(error); // Utiliser le gestionnaire d'erreurs global
     }
   };
 

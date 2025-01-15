@@ -76,29 +76,18 @@ const deleteUserById = async (req, res) => {
 
 
 // Fonction générique pour gérer la création d'un utilisateur
-const handleCreateUser = async (userData, res) => {
+  const handleCreateUser = async (userData) => {
     const { username, email, password } = userData;
   
+    if (!username || !email || !password) {
+      throw new Error('Les champs username, email et password sont requis.');
+    }
+  
     try {
-      // Vérifier si tous les champs obligatoires sont fournis
-      if (!username || !email || !password) {
-        return res.status(400).json({ message: 'Les champs username, email et password sont requis.' });
-      }
-  
-      // Créer l'utilisateur
       const newUser = await createNewUser(userData);
-  
-      // Réponse avec les données de l'utilisateur (sans le mot de passe)
-      return res.status(201).json({
-        message: 'Utilisateur créé avec succès.',
-        user: newUser,
-      });
+      return newUser; 
     } catch (error) {
-      console.error('Erreur lors de la création de l\'utilisateur :', error);
-      return res.status(500).json({
-        message: 'Erreur serveur lors de la création de l\'utilisateur.',
-        error: error.message,
-      });
+      throw error; 
     }
   };
   
