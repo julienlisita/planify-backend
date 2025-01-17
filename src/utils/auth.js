@@ -1,0 +1,11 @@
+// utils/auth.js
+import jwt from 'jsonwebtoken';
+import config from '../config/default.js';
+
+export const generateToken = (user) => {
+  return jwt.sign(
+    { userId: user.id, email: user.email, role: user.roleId },
+    config.jwt.secret,
+    { expiresIn: config.jwt.expiresIn }
+  );
+};

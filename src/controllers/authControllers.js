@@ -3,13 +3,15 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import config from '../config/default.js';
 import { handleCreateUser} from '../controllers/adminControllers.js'
+import { generateToken } from '../utils/auth.js';
 
 // Contrôleur pour créer un nouveau compte
   export const signupUser = async (req, res, next) => {
     const { username, email, password, firstname, lastname } = req.body;
     try {
       const user = await handleCreateUser({ username, email, password, firstname, lastname, roleId: 2 });
-      res.status(201).json({ message: 'Utilisateur créé avec succès.', user });
+      const token = generateToken(user);
+      res.status(201).json({ message: 'Utilisateur créé avec succès.', token, user });
     } catch (error) {
       next(error); // Utiliser le gestionnaire d'erreurs global
     }
@@ -33,11 +35,7 @@ export const login = async (req, res) => {
     }
 
     //Générer un token JWT
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.roleId },
-      config.jwt.secret,
-      { expiresIn: config.jwt.expiresIn }
-    );
+    const token = generateToken(user);
     res.status(200).json({ message: 'Connexion réussie', token });
   } catch (error) {
       next(error); // Passer l'erreur au middleware de gestion des erreurs
