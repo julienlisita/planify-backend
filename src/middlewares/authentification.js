@@ -30,6 +30,16 @@ const authenticate = async (req, res, next) => {
     }
 };
 
+const authorize = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (req.user && allowedRoles.includes(req.user.role)) {
+      next();
+    } else {
+      res.status(403).json({ message: 'Accès interdit' });
+    }
+  };
+};
+
 const isAdmin = async (req, res, next) => {
   try {
     const user = req.user;
@@ -64,4 +74,4 @@ const isSuperAdmin = async (req, res, next) => {
   }
 };
 
-export {authenticate ,isAdmin, isSuperAdmin};
+export {authenticate, authorize, isAdmin, isSuperAdmin};
