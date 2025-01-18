@@ -1,5 +1,6 @@
 import express from 'express';
 import { signupUser,login, logout } from '../controllers/authControllers.js';
+import { authenticate } from '../middlewares/authentification.js';
 
 const router = express.Router();
 
@@ -13,6 +14,6 @@ router.route('/login')
 
 // Route pour se déconnecter
 router.route('/logout')
-    .post(logout);
+    .post(authenticate,logout);
 
 export default router;

@@ -4,7 +4,7 @@ import User from '../models/userModel.js';
 const ROLE_ADMIN = 2;
 const ROLE_SUPERADMIN = 1;
 
-const authenticateAndAuthorize = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
     // Récupération du token depuis les cookies ou les headers
     const token = req.cookies?.access_token || req.headers.authorization?.split(' ')[1];
 
@@ -64,4 +64,4 @@ const isSuperAdmin = async (req, res, next) => {
   }
 };
 
-export {authenticateAndAuthorize, isAdmin, isSuperAdmin};
+export {authenticate ,isAdmin, isSuperAdmin};
