@@ -4,7 +4,7 @@ import config from '../config/default.js';
 
 export const generateToken = (user) => {
   return jwt.sign(
-    { userId: user.id, email: user.email, role: user.roleId },
+    { userId: user.id, email: user.email, roleId: user.roleId },
     config.jwt.secret,
     { expiresIn: config.jwt.expiresIn }
   );
