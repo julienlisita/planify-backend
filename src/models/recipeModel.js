@@ -123,9 +123,6 @@ const Recipe = sequelize.define('Recipe', {
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
         });
-        // Many-to-Many avec table pivot RecipeCategory
-        Recipe.belongsToMany(models.Category, { 
-            through: RecipeCategory });
 
         // Une recette possède plusieurs likes
         Recipe.hasMany(models.Like, { 
@@ -151,6 +148,13 @@ const Recipe = sequelize.define('Recipe', {
         Recipe.belongsToMany(models.Ingredient, {
              through: models.RecipeIngredient });
 
+        // Many-to-Many avec table pivot RecipeSubSubCategory
+        Recipe.belongsToMany(models.SubSubCategory, {
+            through: 'RecipeSubSubCategory',
+            as: 'subSubCategories',  // Utilisez cet alias dans le contrôleur
+            foreignKey: 'recipeId',
+            otherKey: 'subSubCategoryId',
+          });
     };
 
 export default Recipe;

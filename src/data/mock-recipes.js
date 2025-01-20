@@ -1,5 +1,6 @@
 const mockRecipe = [
     {
+      id:1,
       title: "Pâtes Carbonara",
       image: "https://example.com/images/pasta_carbonara.jpg",
       image_name: "pasta_carbonara.jpg",
@@ -13,6 +14,7 @@ const mockRecipe = [
       userId: 1,
     },
     {
+      id:2,
       title: "Curry de Poulet",
       image: "https://example.com/images/chicken_curry.jpg",
       image_name: "chicken_curry.jpg",
@@ -26,6 +28,7 @@ const mockRecipe = [
       userId: 2,
     },
     {
+      id:3,
       title: "Sushis",
       image: "https://example.com/images/sushi_rolls.jpg",
       image_name: "sushi_rolls.jpg",
@@ -39,6 +42,7 @@ const mockRecipe = [
       userId: 3,
     },
     {
+      id:4,
       title: "Poêlée de Légumes",
       image: "https://example.com/images/vegetable_stir_fry.jpg",
       image_name: "vegetable_stir_fry.jpg",
@@ -52,6 +56,7 @@ const mockRecipe = [
       userId: 4,
     },
     {
+      id:5,
       title: "Gâteau au Chocolat",
       image: "https://example.com/images/chocolate_cake.jpg",
       image_name: "chocolate_cake.jpg",
@@ -65,6 +70,7 @@ const mockRecipe = [
       userId: 5,
     },
     {
+      id:6,
       title: "Tacos au Bœuf",
       image: "https://example.com/images/beef_tacos.jpg",
       image_name: "beef_tacos.jpg",
@@ -78,6 +84,7 @@ const mockRecipe = [
       userId: 5,
     },
     {
+      id:7,
       title: "Salade César",
       image: "https://example.com/images/caesar_salad.jpg",
       image_name: "caesar_salad.jpg",
@@ -91,6 +98,7 @@ const mockRecipe = [
       userId: 4,
     },
     {
+      id:8,
       title: "Côtelettes d'Agneau",
       image: "https://example.com/images/lamb_chops.jpg",
       image_name: "lamb_chops.jpg",
@@ -104,6 +112,7 @@ const mockRecipe = [
       userId: 3,
     },
     {
+      id:9,
       title: "Quiche aux Épinards",
       image: "https://example.com/images/spinach_quiche.jpg",
       image_name: "spinach_quiche.jpg",
@@ -117,6 +126,7 @@ const mockRecipe = [
       userId: 2,
     },
     {
+      id:10,
       title: "Saumon Grillé",
       image: "https://example.com/images/grilled_salmon.jpg",
       image_name: "grilled_salmon.jpg",

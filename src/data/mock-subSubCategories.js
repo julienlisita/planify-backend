@@ -19,10 +19,6 @@ const mockSubSubCategories = [
     {id: 17, name: "Brésil", subCategoryId: 15},
     {id: 18, name: "USA", subCategoryId: 16},
     {id: 19, name: "Canada", subCategoryId: 16},
-    {id: 20, name: "Viandes", subCategoryId: 15},
-    {id: 21, name: "Poissons et fruits de mer", subCategoryId: 16},
-    {id: 22, name: "Légumes", subCategoryId: 16},
-
     ]
     
     export default mockSubSubCategories;

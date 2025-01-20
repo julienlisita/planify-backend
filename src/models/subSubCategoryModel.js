@@ -36,6 +36,7 @@ const SubSubCategory = sequelize.define('SubSubCategory', {
           key: 'id',      
         },
     },
+    
 }, {
     tableName: 'SubSubCategories',
     timestamps: false, // Pas besoin de timestamps pour une table de référence
@@ -51,6 +52,14 @@ SubSubCategory.associate = (models) => {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE', 
         });
+
+    // Une categorie appartient à plusieurs recette
+    SubSubCategory.belongsToMany(models.Recipe, {
+        through: 'RecipeSubSubCategory',
+        as: 'recipes',  // Utilisez cet alias dans le contrôleur
+        foreignKey: 'subSubCategoryId',
+        otherKey: 'recipeId',
+      });
   
 };
 
