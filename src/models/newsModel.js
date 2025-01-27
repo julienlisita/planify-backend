@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// newsModel.js
+
+export default (sequelize, DataTypes) => {
 
 const News = sequelize.define('News', {
     id: {
@@ -59,4 +60,5 @@ News.associate = (models) => {
     });
 };
 
-export default News;
+    return News;
+};

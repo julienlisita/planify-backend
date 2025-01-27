@@ -1,9 +1,10 @@
+// authControllers.js
+
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
-import config from '../config/default.js';
 import { handleCreateUser} from '../controllers/adminControllers.js'
 import { generateToken } from '../utils/auth.js';
+import models from '../models/index.js';
+const { User } = models;
 
 // Contrôleur pour créer un nouveau compte
   export const signupUser = async (req, res, next) => {

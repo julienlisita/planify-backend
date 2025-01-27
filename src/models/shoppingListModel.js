@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// shoppingListModel.js
+
+export default (sequelize, DataTypes) => {
 
 const ShoppingList = sequelize.define('ShoppingList', {
     id: {
@@ -58,7 +59,11 @@ ShoppingList.associate = (models) => {
     // Many-to-Many avec table pivot ShoppingListIngredient personnalisée
     ShoppingList.belongsToMany(models.Ingredient, {
         through: models.ShoppingListIngredient,
+        as: 'ingredients', 
+        foreignKey: 'shoppingListId',
+        otherKey: 'ingredientId',
     });
 };
-
-export default ShoppingList;
+return ShoppingList;
+    
+};

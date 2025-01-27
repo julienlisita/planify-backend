@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// roleModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Role = sequelize.define('Role', {
     id: {
@@ -30,5 +31,5 @@ const Role = sequelize.define('Role', {
       onDelete: 'SET NULL', 
       onUpdate: 'CASCADE',});
   };
-
-export default Role;
+  return Role;
+};

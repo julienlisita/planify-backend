@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// notificationModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Notification = sequelize.define('Notification', {
   id: {
@@ -67,5 +68,5 @@ const Notification = sequelize.define('Notification', {
       foreignKey: 'userId'
     });
   };
-
-export default Notification;
+  return Notification;
+};

@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// shoppingListIngredientModel.js
+
+export default (sequelize, DataTypes) => {
 
 const ShoppingListIngredient = sequelize.define('ShoppingListIngredient', {
     id: {
@@ -55,5 +56,6 @@ const ShoppingListIngredient = sequelize.define('ShoppingListIngredient', {
     timestamps: false, // Pas besoin de timestamps pour une table de référence
     underscored: true,
 });
+    return ShoppingListIngredient;
 
-export default ShoppingListIngredient;
+};

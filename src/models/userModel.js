@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js'; 
+// userModel.js
+
+export default (sequelize, DataTypes) => {
 
 const User = sequelize.define('User', {
   id: {
@@ -146,5 +147,5 @@ const User = sequelize.define('User', {
         foreignKey: 'userId',});
 
   };
-
-export default User;
+  return User;
+};

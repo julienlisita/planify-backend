@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// subSubCategoryModel.js
+
+export default (sequelize, DataTypes) => {
 
 const SubSubCategory = sequelize.define('SubSubCategory', {
     id: {
@@ -55,12 +56,11 @@ SubSubCategory.associate = (models) => {
 
     // Une categorie appartient à plusieurs recette
     SubSubCategory.belongsToMany(models.Recipe, {
-        through: 'RecipeSubSubCategory',
-        as: 'recipes',  // Utilisez cet alias dans le contrôleur
-        foreignKey: 'subSubCategoryId',
-        otherKey: 'recipeId',
-      });
-  
+    through: 'RecipeSubSubCategory',
+    as: 'recipes', 
+    foreignKey: 'subSubCategoryId',
+    otherKey: 'recipeId',
+        });
+    };
+    return SubSubCategory;
 };
-
-export default SubSubCategory;

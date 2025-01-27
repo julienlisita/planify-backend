@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// favoriteModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Favorite = sequelize.define('Favorite', {
     id: {
@@ -57,4 +58,5 @@ Favorite.associate = (models) => {
     });
 };
 
-export default Favorite;
+        return Favorite;
+};

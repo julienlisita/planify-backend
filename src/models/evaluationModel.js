@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// evaluationModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Evaluation = sequelize.define('Evaluation', {
     id: {
@@ -75,5 +76,5 @@ Evaluation.associate = (models) => {
         onUpdate: 'CASCADE',
     });
 };
-
-export default Evaluation;
+        return Evaluation;
+};

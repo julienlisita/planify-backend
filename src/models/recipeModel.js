@@ -1,6 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
-import ShoppingListIngredient from './shoppingListIngredientModel.js';
+// recipeModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Recipe = sequelize.define('Recipe', {
     id: {
@@ -146,15 +146,19 @@ const Recipe = sequelize.define('Recipe', {
 
         // Many-to-Many avec table pivot RecipeIngredient personnalisée
         Recipe.belongsToMany(models.Ingredient, {
-             through: models.RecipeIngredient });
+            through: models.RecipeIngredient,
+            as: 'ingredients',  
+            foreignKey: 'recipeId',
+            otherKey: 'ingredientId',
+        });
 
         // Many-to-Many avec table pivot RecipeSubSubCategory
         Recipe.belongsToMany(models.SubSubCategory, {
             through: 'RecipeSubSubCategory',
-            as: 'subSubCategories',  // Utilisez cet alias dans le contrôleur
+            as: 'subSubCategories',  
             foreignKey: 'recipeId',
             otherKey: 'subSubCategoryId',
           });
     };
-
-export default Recipe;
+    return Recipe;
+};

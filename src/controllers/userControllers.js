@@ -1,7 +1,8 @@
+// userController.js
+
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
-import config from '../config/default.js';
+import models from '../models/index.js';
+const { User } = models;
 
 
 const getAllProfiles = async (req, res) => {

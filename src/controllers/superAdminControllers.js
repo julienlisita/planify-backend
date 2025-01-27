@@ -1,5 +1,8 @@
+// superAdminControllers.js
+
 import bcrypt from 'bcrypt';
-import User from '../models/userModel.js';
+import models from '../models/index.js';
+const { User } = models;
 const ROLE_ADMIN = 2;
 
 // Récupérer tous les admins

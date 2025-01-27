@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// likeModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Like = sequelize.define('Like', {
     id: {
@@ -54,4 +55,5 @@ const Like = sequelize.define('Like', {
         onUpdate: 'CASCADE',});
   };
 
-export default Like;
+    return Like;
+};

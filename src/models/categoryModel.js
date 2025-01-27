@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// categoryModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Category = sequelize.define('Category', {
     id: {
@@ -45,5 +46,5 @@ Category.associate = (models) => {
   
 };
        
-
-export default Category;
+        return Category;
+};

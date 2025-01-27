@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// subCategoryModel.js
+
+export default (sequelize, DataTypes) => {
 
 const SubCategory = sequelize.define('SubCategory', {
     id: {
@@ -58,6 +59,7 @@ SubCategory.associate = (models) => {
         onDelete: 'CASCADE', 
         onUpdate: 'CASCADE', });
   
-};
+    };
 
-export default SubCategory;
+    return SubCategory;
+};

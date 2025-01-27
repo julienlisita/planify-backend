@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// ingredientModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Ingredient = sequelize.define('Ingredient', {
   id: {
@@ -37,13 +38,22 @@ const Ingredient = sequelize.define('Ingredient', {
  // Définition des associations
  Ingredient.associate = (models) => {
 
-  // Many-to-Many avec table pivot Recipe
+  // Many-to-Many avec table pivot explicite Recipe-Ingredients
     Ingredient.belongsToMany(models.Recipe, { 
-    through: models.RecipeIngredient });
+    through: models.RecipeIngredient,
+    as: 'recipes',  
+    foreignKey: 'ingredientId',
+    otherKey: 'recipeId',
+   });
 
-  // Many-to-Many avec table pivot ShoppingList
+  // Many-to-Many avec table pivot ShoppingList-Ingredients
     Ingredient.belongsToMany(models.ShoppingList, { 
-    through: models.ShoppingListIngredient });
+    through: models.ShoppingListIngredient,
+    as: 'shoppingLists',  
+    foreignKey: 'ingredientId',
+    otherKey: 'shoppingListId', 
+  });
 };
 
-export default Ingredient;
+    return Ingredient;
+};

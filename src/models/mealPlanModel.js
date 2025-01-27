@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// mealPlanModel.js
+
+export default (sequelize, DataTypes) => {
 
 const MealPlan = sequelize.define('MealPLanModel', {
     id: {
@@ -76,5 +77,5 @@ MealPlan.associate = (models) => {
         onUpdate: 'CASCADE',
     });
 }
-
-export default MealPlan;
+    return MealPlan;
+};

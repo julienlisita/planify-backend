@@ -1,21 +1,7 @@
 import { sequelize } from './database.js'; // Importation de sequelize
-import User from '../models/userModel.js';    // Modèle utilisateur
-import Role from '../models/roleModel.js';    // Modèle rôle
-import Recipe from '../models/recipeModel.js';
-import Ingredient from '../models/ingredientModel.js';
-import RecipeIngredient from '../models/recipeIngredientModel.js';
-import ShoppingList from '../models/shoppingListModel.js';
-import ShoppingListIngredient from '../models/shoppingListIngredientModel.js';
-import Like from '../models/likeModel.js';
-import Comment from '../models/commentModel.js'
-import Favorite from '../models/favoriteModel.js';
-import Notification from '../models/notificationModel.js';
-import MealPlan from '../models/mealPlanModel.js';
-import Evaluation from '../models/evaluationModel.js';
-import Category from '../models/categoryModel.js';
-import Message from '../models/messageModel.js';
-import SubCategory from '../models/subCategoryModel.js';
-import SubSubCategory from '../models/subSubCategoryModel.js';
+import models from '../models/index.js';
+const { Role, User, Recipe, Ingredient, RecipeIngredient, ShoppingList, ShoppingListIngredient, Like, Message, Notification, Comment, Evaluation, MealPlan, Favorite, Category, SubCategory, SubSubCategory  } = models;
+
 import mockUsers from '../data/mock-users.js';
 import mockFavorites from '../data/mock-favorites.js';
 import mockRecipes from '../data/mock-recipes.js';
@@ -24,6 +10,7 @@ import mockShoppingLists from '../data/mock-shoppingLists.js';
 import mockShoppingListIngredients from '../data/mock-shoppingListIngredient.js';
 import mockRecipeIngredients from '../data/mock-recipeIngredient.js';
 import mockLikes from '../data/mock-likes.js';
+import mockNotifications from '../data/mock-notifications.js';
 import mockComments from '../data/mock-comments.js';
 import mockMealPlans from '../data/mock-mealPlans.js';
 import mockEvaluations from '../data/mock-evaluations.js';
@@ -31,30 +18,32 @@ import mockMessages from '../data/mock-messages.js';
 import mockCategories from '../data/mock-categories.js';
 import mockSubCategories from '../data/mock-subCategories.js';
 import mockSubSubCategories from '../data/mock-subSubCategories.js';
+
 import bcrypt from 'bcrypt'; // Importation de bcrypt
-import mockNotifications from '../data/mock-notifications.js';
 
 const syncDatabase = async () => {
     try {
 
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0;');
         // Supprimer toutes les tables existantes (en cas de besoin)
          await sequelize.drop();
         // Synchronisation des tables
         await sequelize.sync({ force: true });
         console.log('Base de données synchronisée avec succès.');
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1;');
 
-        // Pré-remplissage des rôles
+        // Pré-remplissage de la table roles
         const roles = [
             { id: 1, name: 'superAdmin' },
             { id: 2, name: 'admin' },
             { id: 3, name: 'author' },
             { id: 4, name: 'member' }
         ];
-        
-        await Role.bulkCreate(roles);
-        console.log('Rôles ajoutés avec succès.');
 
-        // Pré-remplissage des utilisateurs
+        await Role.bulkCreate(roles);
+        console.log('Table roles remplie avec succès.');
+
+        // Pré-remplissage de la table users
         const hashedUsers = await Promise.all(
             mockUsers.map(async (user) => ({
                 ...user,
@@ -62,66 +51,90 @@ const syncDatabase = async () => {
             }))
         );
         await User.bulkCreate(hashedUsers);
-        console.log('Utilisateurs ajoutés avec succès.');
+        console.log('Table users remplie avec succès.');
 
-        // Pré-remplissage des recettes
+        // Pré-remplissage de la table recipes
         await Recipe.bulkCreate(mockRecipes);
-        console.log('Recette ajoutées avec succès.');
+        console.log('Table recipes remplie avec succès.');
 
-        // Pré-remplissage des ingrédients
+        // Pré-remplissage de la table ingredients
         await Ingredient.bulkCreate(mockIngredients);
-        console.log('Ingrédients ajoutés avec succès.');
+        console.log('Table ingredients remplie avec succès.');
 
-        // Pré-remplissage de la table recipeIngredients
+        // Pré-remplissage de la table pivot recipeIngredients
         await RecipeIngredient.bulkCreate(mockRecipeIngredients);
-        console.log('table  RecipeIngredient remplie avec succès.');
+        console.log('Table recipeIngredients remplie avec succès.');
 
-        // Pré-remplissage de la table ShoppingLists
+        // Pré-remplissage de la table shoppingLists
         await ShoppingList.bulkCreate(mockShoppingLists);
-        console.log('table  ShoppingList remplie avec succès.');
+        console.log('Table shoppingLists remplie avec succès.');
 
-        // Pré-remplissage de la table ShoppingListIngredients
+        // Pré-remplissage de la table pivot shoppingListIngredients
         await ShoppingListIngredient.bulkCreate(mockShoppingListIngredients);
-        console.log('table  ShoppingList remplie avec succès.');
+        console.log('Table pivot shoppingListIngrédients remplie avec succès.');
 
         // Pré-remplissage des likes
         await Like.bulkCreate(mockLikes);
-        console.log('Likes ajoutés avec succès.');
+        console.log('Table likes remplie succès.');
 
-        // Pré-remplissage des likes
+        // Pré-remplissage de la table messages
         await Message.bulkCreate(mockMessages );
-        console.log('Likes ajoutés avec succès.');
-        // Pré-remplissage des likes
+        console.log('Table messages remplie avec succès.');
+
+        // Pré-remplissage de la table likes
         await Notification.bulkCreate(mockNotifications );
-        console.log('Likes ajoutés avec succès.');
-        // Pré-remplissage des commentaires
+        console.log('Table notifications remplie avec succès.');
+
+        // Pré-remplissage de la table comments
         await Comment.bulkCreate(mockComments);
-        console.log('Commentaires ajoutés avec succès.');
+        console.log('Table comments remplie avec succès.');
 
-        // Pré-remplissage des évaluations
+        // Pré-remplissage de la table evaluations
         await Evaluation.bulkCreate(mockEvaluations);
-        console.log('Evaluations ajoutés avec succès.');
+        console.log('Table evaluations remplie avec succès.');
 
-        // Pré-remplissage des commentaires
+        // Pré-remplissage de la table mealPlans
         await MealPlan.bulkCreate(mockMealPlans);
-        console.log('Meal plans ajoutés avec succès.');
+        console.log('Table mealPlans remplie avec succès.');
 
-        // Pré-remplissage des favoris
+        // Pré-remplissage de la table favorites
         await Favorite.bulkCreate(mockFavorites);
-        console.log('Evaluations ajoutés avec succès.');
+        console.log('Table favorites remplie avec succès.');
 
-        // Pré-remplissage des catégorie
+        // Pré-remplissage de la table categories
         await Category.bulkCreate(mockCategories);
-        console.log('Catégories ajoutées avec succès.');
+        console.log('Table categories remplie avec succès.');
 
-        // Pré-remplissage des sous-catégorie
+        // Pré-remplissage de la table subCategories
         await SubCategory.bulkCreate(mockSubCategories);
-        console.log('Sous catégories ajoutées avec succès.');
+        console.log('Table subCategories remplie avec succès.');
 
-        // Pré-remplissage des sous-sous-catégorie
+        // Pré-remplissage de la table subSubCategories
         await SubSubCategory.bulkCreate(mockSubSubCategories);
-        console.log('Sous-sous catégories ajoutées avec succès.');
+        console.log('Table subSubcCategories remplie avec succès');
 
+        // Pré-remplissage de la table pivot recipeSubSubCategory
+        const mockRecipeSubSubCategory = [
+            { recipeId: 1, subSubCategoryId: 7 },
+            { recipeId: 2, subSubCategoryId: 7 } , 
+            { recipeId: 3, subSubCategoryId: 7 },  
+            { recipeId: 4, subSubCategoryId: 7 } ,
+            { recipeId: 5, subSubCategoryId: 7 }, 
+            { recipeId: 6, subSubCategoryId: 7 } , 
+            { recipeId: 7, subSubCategoryId: 7 },  
+            { recipeId: 8, subSubCategoryId: 7 }  , 
+            { recipeId: 9, subSubCategoryId: 7 }, 
+            { recipeId: 10, subSubCategoryId: 7 }  
+          ];
+          for (const { recipeId, subSubCategoryId } of mockRecipeSubSubCategory) {
+            const recipe = await Recipe.findOne({ where: { id: recipeId } });
+            const subSubCategory = await SubSubCategory.findOne({ where: { id: subSubCategoryId } });
+        
+            if (recipe && subSubCategory) {
+              await recipe.addSubSubCategory(subSubCategory);
+            }
+          }
+          console.log('Table pivot recipeSubSubCategories remplie avec succès.');
 
     } catch (error) {
         console.error('Erreur lors de la synchronisation de la base de données:', error);

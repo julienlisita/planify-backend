@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// messageModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Message = sequelize.define('Message', {
   id: {
@@ -70,4 +71,5 @@ Message.associate = (models) => {
     as: 'receiver'});
 };
 
-export default Message;
+    return Message;
+};

@@ -1,7 +1,8 @@
+// adminControllers.js
+
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
-import config from '../config/default.js';
+import models from '../models/index.js';
+const { User } = models;
 
 // Récupérer tous les utilisateurs
 const getAllUsers = async (req, res) => {
@@ -74,7 +75,6 @@ const deleteUserById = async (req, res) => {
     }
 };
 
-
 // Fonction générique pour gérer la création d'un utilisateur
   const handleCreateUser = async (userData) => {
     const { username, email, password } = userData;
@@ -90,7 +90,6 @@ const deleteUserById = async (req, res) => {
       throw error; 
     }
   };
-  
   
   // Fonction pour la logique de création d'un utilisateur (générique)
 const createNewUser = async (userData) => {

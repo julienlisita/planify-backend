@@ -1,5 +1,6 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database.js';
+// commentModel.js
+
+export default (sequelize, DataTypes) => {
 
 const Comment = sequelize.define('Comment', {
     id: {
@@ -66,4 +67,5 @@ Comment.associate = (models) => {
     });
 };
 
-export default Comment;
+        return Comment;
+};
